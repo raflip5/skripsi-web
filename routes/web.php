@@ -20,7 +20,6 @@ Route::middleware('guest')->group(function() {
         //klasifikasi c45
         Route::get('/classification', [ClassificationControllerC45::class, 'index'])->name('classification.index');
         Route::post('/predict', [ClassificationControllerC45::class, 'predict'])->name('classification.predict');
-
     });
 });
 
