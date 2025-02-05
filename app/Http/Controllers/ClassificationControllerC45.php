@@ -25,7 +25,6 @@ class ClassificationControllerC45 extends Controller
 
         // Data latih dan label (hasil klasifikasi)
         $samples = [
-            // Format: [jenis_kelamin, kelas, umur, insiden, insiden_langsung, siapa_pelaku, jenis_kelamin_pelaku, lokasi, frekuensi, dampak_psikologis, label]
             ['Laki-Laki', 'X', 15, 'BV', 'Langsung', 'Teman Sebaya', 'Laki-Laki', 'kelas', 'jarang', 'rendah', 'Bullying Verbal'],
             ['Perempuan', 'XI', 16, 'BS', 'Tidak Langsung', 'Senior', 'Perempuan', 'media sosial', 'kadang-kadang', 'sedang', 'Bullying Sosial'],
             ['Laki-Laki', 'XII', 17, 'BF', 'Langsung', 'Senior', 'Laki-Laki', 'koridor sekolah', 'tinggi', 'tinggi', 'Bullying Fisik'],
@@ -52,7 +51,6 @@ class ClassificationControllerC45 extends Controller
             ['Perempuan', 'XII', 17, 'BF', 'Langsung', 'Senior', 'Laki-Laki', 'media sosial', 'jarang', 'tinggi', 'Bullying Fisik'],
             ['Laki-Laki', 'X', 15, 'PSV', 'Tidak Langsung', 'Teman Sebaya', 'Campuran', 'koridor sekolah', 'kadang-kadang', 'rendah', 'Pelecehan Seksual Verbal'],
             ['Perempuan', 'XI', 16, 'PSF', 'Langsung', 'Guru/Staff', 'Perempuan', 'lapangan', 'tinggi', 'sedang', 'Pelecehan Seksual Fisik'],
-            // ... tambahkan data lainnya untuk mencapai 100 sampel
         ];
         
         // Hasil klasifikasi
