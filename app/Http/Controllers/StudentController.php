@@ -7,6 +7,7 @@ use App\Models\Student;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Yajra\DataTables\DataTables;
 
@@ -17,6 +18,12 @@ class StudentController extends Controller
      */
     public function index(): View|JsonResponse
     {
+        $user = Auth::user();
+
+        if ($user->role != 1) {
+            return redirect()->route('dashboard');
+        }
+
         if (request()->ajax()) {
             $students = Student::all();
 

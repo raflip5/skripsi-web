@@ -5,15 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\History;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Phpml\Classification\DecisionTree;
-use Phpml\Dataset\Demo\IrisDataset; // Hapus jika dataset Anda berbeda
-use Phpml\ModelManager;
 
 class ClassificationControllerC45 extends Controller
 {
     public function index(Request $request): View
     {
+        $user = Auth::user();
+
+        if ($user->role != 1) {
+            return redirect()->route('dashboard');
+        }
+
         $nis = $request->query('nis');
 
         $student = Student::where('nis', $nis)->first();
