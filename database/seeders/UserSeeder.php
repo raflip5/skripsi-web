@@ -14,11 +14,12 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // Disini klo mau ganti username password awalan, atau nambah user karna gada regis sama gada menu tambah user
         $users = [
             [
                 'name' => 'Admin',
                 'username' => 'admin',
-                'password' => Hash::make('admin123'),
+                'password' => Hash::make('admin'),
                 'role' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -26,7 +27,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Guru BK',
                 'username' => 'user_bk',
-                'password' => Hash::make('user123'),
+                'password' => Hash::make('user_bk'),
                 'role' => 2,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()

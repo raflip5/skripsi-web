@@ -72,7 +72,7 @@
                                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                         required disabled>
                                         <option value="" disabled selected>Pilih kelas</option>
-                                        @foreach (['X', 'X1', 'X11'] as $kelas)
+                                        @foreach (['X 1', 'XI 1', 'XII 1'] as $kelas)
                                             <option value="{{ $kelas }}"
                                                 {{ isset($student) && $student->kelas == $kelas ? 'selected' : '' }}>
                                                 {{ $kelas }}
