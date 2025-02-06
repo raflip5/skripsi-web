@@ -2,25 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\History;
+use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Phpml\Classification\DecisionTree;
 use Phpml\Dataset\Demo\IrisDataset; // Hapus jika dataset Anda berbeda
 use Phpml\ModelManager;
 
 class ClassificationControllerC45 extends Controller
 {
-    public function index()
+    public function index(Request $request): View
     {
-        return view('clasification.index');
+        $nis = $request->query('nis');
+
+        $student = Student::where('nis', $nis)->first();
+
+        return view('clasification.index', compact('student'));
     }
 
     public function predict(Request $request)
     {
         // Ambil data dari form
+        $nis = $request->nis;
+
+        $student = Student::where('nis', $nis)->first();
+
         $data = [
-            [$request->jenis_kelamin, $request->kelas, $request->umur, $request->insiden, 
-             $request->insiden_langsung, $request->siapa_pelaku, $request->jenis_kelamin_pelaku, 
-             $request->lokasi, $request->frekuensi, $request->dampak_psikologis]
+            [
+                $request->jenis_kelamin,
+                $request->kelas,
+                $request->umur,
+                $request->insiden,
+                $request->insiden_langsung,
+                $request->siapa_pelaku,
+                $request->jenis_kelamin_pelaku,
+                $request->lokasi,
+                $request->frekuensi,
+                $request->dampak_psikologis
+            ]
         ];
 
         // Data latih dan label (hasil klasifikasi)
@@ -52,13 +72,13 @@ class ClassificationControllerC45 extends Controller
             ['Laki-Laki', 'X', 15, 'PSV', 'Tidak Langsung', 'Teman Sebaya', 'Campuran', 'koridor sekolah', 'kadang-kadang', 'rendah', 'Pelecehan Seksual Verbal'],
             ['Perempuan', 'XI', 16, 'PSF', 'Langsung', 'Guru/Staff', 'Perempuan', 'lapangan', 'tinggi', 'sedang', 'Pelecehan Seksual Fisik'],
         ];
-        
+
         // Hasil klasifikasi
-        $features = array_map(function($sample) {
+        $features = array_map(function ($sample) {
             return array_slice($sample, 0, count($sample) - 1); // Ambil semua data kecuali label
         }, $samples);
-        
-        $labels = array_map(function($sample) {
+
+        $labels = array_map(function ($sample) {
             return end($sample); // Ambil label yang ada di akhir data
         }, $samples);
 
@@ -70,6 +90,12 @@ class ClassificationControllerC45 extends Controller
         $prediction = $classifier->predict($data);
 
         $confidences = $this->calculateConfidence($classifier, $data, $features, $labels);
+
+        History::create([
+            'student_id' => $student->id,
+            'result' => $prediction[0],
+            'score' => $confidences
+        ]);
 
         // Menampilkan hasil prediksi dan skor kepastian
         return view('clasification.result', [

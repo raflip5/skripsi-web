@@ -6,19 +6,25 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('tbl_users', function (Blueprint $table) {
+        Schema::create('tbl_histories', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('username')->unique();
-            $table->string('password');
+            $table->integer('student_id');
+            $table->string('result');
+            $table->float('score');
             $table->timestamps();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::dropIfExists('tbl_users');
+        Schema::dropIfExists('tbl_histories');
     }
 };
