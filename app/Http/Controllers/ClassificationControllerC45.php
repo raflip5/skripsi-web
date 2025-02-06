@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\History;
 use App\Models\Student;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -11,7 +12,7 @@ use Phpml\Classification\DecisionTree;
 
 class ClassificationControllerC45 extends Controller
 {
-    public function index(Request $request): View
+    public function index(Request $request): View|RedirectResponse
     {
         $user = Auth::user();
 
