@@ -17,6 +17,8 @@ class ClassificationControllerC45 extends Controller
         $user = Auth::user();
 
         if ($user->role != 1) {
+            flash()->error('Anda tidak memiliki izin');
+
             return redirect()->route('dashboard');
         }
 
