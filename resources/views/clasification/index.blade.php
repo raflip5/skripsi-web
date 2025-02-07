@@ -66,15 +66,15 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="kelas" disabled
+                                    <label for="kelas"
                                         class="block text-sm font-medium text-gray-700">Kelas</label>
-                                    <select name="kelas" id="kelas"
+                                    <select name="kelas" id="kelas" disabled
                                         class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                        required disabled>
+                                        required>
                                         <option value="" disabled selected>Pilih kelas</option>
-                                        @foreach (['X 1', 'XI 1', 'XII 1'] as $kelas)
+                                        @foreach (['X 1','X 2','X 3','XI 1', 'XI 2','XI 3', 'XII 1','XII 2','XII 3'] as $kelas)
                                             <option value="{{ $kelas }}"
-                                                {{ isset($student) && $student->kelas == $kelas ? 'selected' : '' }}>
+                                                {{ isset($student) && str_replace('\r', '', $student->kelas) == $kelas ? 'selected' : '' }}>
                                                 {{ $kelas }}
                                             </option>
                                         @endforeach

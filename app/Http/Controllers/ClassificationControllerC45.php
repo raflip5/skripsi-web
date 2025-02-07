@@ -25,7 +25,12 @@ class ClassificationControllerC45 extends Controller
         $nis = $request->query('nis');
 
         $student = Student::where('nis', $nis)->first();
-
+        
+        if ($student) {
+            $student->jenis_kelamin = trim(str_replace(["\r", "\n", " "], "", $student->jenis_kelamin));
+            $student->kelas = trim($student->kelas);
+        }
+        
         return view('clasification.index', compact('student'));
     }
 
