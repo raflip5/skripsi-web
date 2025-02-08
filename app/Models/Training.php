@@ -10,7 +10,7 @@ class Training extends Model
     protected $table = 'tbl_trainings';
 
     protected $fillable = [
-        'student_id',
+        'student_nis',
         'umur',
         'insiden',
         'lokasi',
@@ -24,6 +24,6 @@ class Training extends Model
 
     public function student(): BelongsTo
     {
-        return $this->belongsTo(Student::class, 'student_id');
+        return $this->belongsTo(Student::class, 'student_nis', 'nis');
     }
 }

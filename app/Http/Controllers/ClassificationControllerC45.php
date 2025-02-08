@@ -113,7 +113,7 @@ class ClassificationControllerC45 extends Controller
         // Create data latih
         Training::firstOrCreate(
             [
-                'student_id' => $student->id,
+                'student_nis' => $student->nis,
                 'umur' => $request->umur,
                 'insiden' => $request->insiden,
                 'lokasi' => $request->lokasi,

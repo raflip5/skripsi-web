@@ -12,7 +12,7 @@ class TrainingSeed extends Seeder
     {
         $trainings = [
             [
-                'student_id' => 1,
+                'student_nis' => 9221,
                 'umur' => 15,
                 'insiden' => 'BV',
                 'lokasi' => 'kelas',
@@ -26,7 +26,7 @@ class TrainingSeed extends Seeder
                 'updated_at' => Carbon::now()
             ],
             [
-                'student_id' => 1,
+                'student_nis' => 9221,
                 'umur' => 15,
                 'insiden' => 'BF',
                 'lokasi' => 'kelas',
