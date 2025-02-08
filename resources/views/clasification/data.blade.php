@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Laporan Kasus')
+@section('title', 'Data Latih')
 
 @section('styles')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.tailwindcss.min.css">
@@ -16,40 +16,30 @@
                 <div class="p-8 bg-gradient-to-r from-blue-50 to-blue-100 border-b border-blue-200">
                     <div class="flex justify-between items-center">
                         <div>
-                            <h2 class="text-3xl font-extrabold text-blue-800 tracking-tight">Laporan Kasus</h2>
-                            <p class="mt-2 text-blue-600 text-sm">Data lengkap laporan kasus siswa</p>
-                        </div>
-                        <div class="flex space-x-3">
-                            <div id="exportButtons" class="flex items-center space-x-2"></div>
-                            <button id="filterBtn"
-                                class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg transition-all duration-200 flex items-center shadow-md hover:shadow-lg">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
-                                    fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                Filter Data
-                            </button>
+                            <h2 class="text-3xl font-extrabold text-blue-800 tracking-tight">Data Latih</h2>
+                            <p class="mt-2 text-blue-600 text-sm">Data latih algoritma C45</p>
                         </div>
                     </div>
                 </div>
-
+                
                 <!-- Table Section -->
                 <div class="p-6">
                     <div class="overflow-x-auto">
                         <table id="studentTable" class="w-full border-collapse">
                             <thead>
                                 <tr class="bg-blue-50 text-blue-700 uppercase text-sm">
-                                    <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">NIS</th>
-                                    <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Nama</th>
-                                    <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Jenis Kelamin
-                                    </th>
+                                    <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">JK Korban</th>
                                     <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Kelas</th>
-                                    <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Tanggal Laporan
-                                    </th>
-                                    <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Hasil</th>
-                                    <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Skor</th>
+                                    <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Umur</th>
+                                    <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Insiden</th>
+                                    <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Insiden Kejadian</th>
+                                    <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Pelaku</th>
+                                    <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">JK Pelaku</th>
+                                    <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Lokasi</th>
+                                    <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Frekuensi</th>
+                                    <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Dampak Psikologis</th>
+                                    <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Label</th>
+                                
                                 </tr>
                             </thead>
                             <tbody>
@@ -62,22 +52,16 @@
                     <div class="mt-6 flex justify-between items-center border-t border-gray-200 pt-4">
                         <div id="pageInfo" class="text-gray-600 text-sm"></div>
                         <div class="flex space-x-2">
-                            <button id="prevPage"
-                                class="bg-white border border-blue-600 text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-lg transition-colors duration-200 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 19l-7-7 7-7" />
+                            <button id="prevPage" class="bg-white border border-blue-600 text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-lg transition-colors duration-200 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                                 </svg>
                                 Sebelumnya
                             </button>
-                            <button id="nextPage"
-                                class="bg-white border border-blue-600 text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-lg transition-colors duration-200 flex items-center">
+                            <button id="nextPage" class="bg-white border border-blue-600 text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-lg transition-colors duration-200 flex items-center">
                                 Selanjutnya
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 5l7 7-7 7" />
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                 </svg>
                             </button>
                         </div>
@@ -106,108 +90,102 @@
                 serverSide: true,
                 pageLength: 4,
                 ajax: {
-                    url: "{{ route('report') }}",
+                    url: "{{ route('data.training') }}",
                     type: 'GET'
                 },
-                dom: 'Bfrtip',
-                buttons: [{
-                        extend: 'pdfHtml5',
-                        text: '<span class="flex items-center"><svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12.5l-5-5h10l-5 5z"/></svg>Export PDF</span>',
-                        className: 'bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200',
-                        exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
-                        }
-                    },
-                    {
-                        extend: 'excelHtml5',
-                        text: '<span class="flex items-center"><svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12.5l-5-5h10l-5 5z"/></svg>Export Excel</span>',
-                        className: 'bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200',
-                        exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
-                        }
-                    }
-                ],
-                columns: [{
-                        data: 'student.nis',
-                        name: 'student.nis',
-                        render: function(data) {
-                            return data || '-';
-                        },
-                        className: 'px-4 py-3 text-sm border-b border-gray-100'
-                    },
-                    {
-                        data: 'student.name',
-                        name: 'student.name',
-                        render: function(data) {
-                            return data || '-';
-                        },
-                        className: 'px-4 py-3 text-sm border-b border-gray-100'
-                    },
-                    {
-                        data: 'student.jenis_kelamin',
+                dom: 'frtip',
+                columns: [
+                    { 
+                        data: 'student.jenis_kelamin', 
                         name: 'student.jenis_kelamin',
                         render: function(data) {
-                            return data === 'L' ? 'Laki-laki' :
-                                data === 'P' ? 'Perempuan' :
-                                data || '-';
+                            return data === 'L' ? 'Laki-laki' : 
+                                   data === 'P' ? 'Perempuan' : 
+                                   data || '-';
                         },
                         className: 'px-4 py-3 text-sm border-b border-gray-100'
                     },
-                    {
-                        data: 'student.kelas',
+                    { 
+                        data: 'student.kelas', 
                         name: 'student.kelas',
                         render: function(data) {
                             return data || '-';
                         },
                         className: 'px-4 py-3 text-sm border-b border-gray-100'
                     },
-                    {
-                        data: 'created_at',
-                        name: 'created_at',
-                        render: function(data) {
-                            if (!data) return '-';
-
-                            // Convert the string to a Date object
-                            let date = new Date(data);
-
-                            // Format the date to "d M Y h:i"
-                            let formattedDate = date.toLocaleString('id-ID', {
-                                timeZone: 'Asia/Jakarta',
-                                day: '2-digit',
-                                month: 'short',
-                                year: 'numeric',
-                                hour: '2-digit',
-                                minute: '2-digit',
-                                hour12: true
-                            }).replace(',', '')
-                            .replace('PM', 'WIB')
-                            .replace('AM', 'WIB');
-
-                            return formattedDate;
-                        },
-                        className: 'px-4 py-3 text-sm border-b border-gray-100'
-                    },
-
-                    {
-                        data: 'result',
-                        name: 'result',
+                    { 
+                        data: 'umur', 
+                        name: 'umur',
                         render: function(data) {
                             return data || '-';
                         },
                         className: 'px-4 py-3 text-sm border-b border-gray-100'
                     },
-                    {
-                        data: 'score',
-                        name: 'score',
+                    { 
+                        data: 'insiden', 
+                        name: 'insiden',
                         render: function(data) {
-                            return data !== null ?
-                                (data >= 75 ?
-                                    `<span class="text-green-600 font-semibold">${data.toFixed(2)}</span>` :
-                                    `<span class="text-red-600 font-semibold">${data.toFixed(2)}</span>`
-                                ) : '-';
+                            return data || '-';
                         },
                         className: 'px-4 py-3 text-sm border-b border-gray-100'
-                    }
+                    },
+                    { 
+                        data: 'lokasi', 
+                        name: 'lokasi',
+                        render: function(data) {
+                            return data || '-';
+                        },
+                        className: 'px-4 py-3 text-sm border-b border-gray-100'
+                    },
+                    { 
+                        data: 'frekuensi', 
+                        name: 'frekuensi',
+                        render: function(data) {
+                            return data || '-';
+                        },
+                        className: 'px-4 py-3 text-sm border-b border-gray-100'
+                    },
+                    { 
+                        data: 'insiden_kejadian', 
+                        name: 'insiden_kejadian',
+                        render: function(data) {
+                            return data || '-';
+                        },
+                        className: 'px-4 py-3 text-sm border-b border-gray-100'
+                    },
+                    { 
+                        data: 'pelaku', 
+                        name: 'pelaku',
+                        render: function(data) {
+                            return data || '-';
+                        },
+                        className: 'px-4 py-3 text-sm border-b border-gray-100'
+                    },
+                    { 
+                        data: 'jenis_kelamin_pelaku', 
+                        name: 'jenis_kelamin_pelaku',
+                        render: function(data) {
+                            return data || '-';
+                        },
+                        className: 'px-4 py-3 text-sm border-b border-gray-100'
+                    },
+                    { 
+                        data: 'dampak', 
+                        name: 'dampak',
+                        render: function(data) {
+                            return data || '-';
+                        },
+                        className: 'px-4 py-3 text-sm border-b border-gray-100'
+                    },
+                    { 
+                        data: 'hasil', 
+                        name: 'hasil',
+                        render: function(data) {
+                            return data || '-';
+                        },
+                        className: 'px-4 py-3 text-sm border-b border-gray-100'
+                    },
+                    
                 ],
                 language: {
                     processing: '<div class="flex justify-center"><div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div></div>',
@@ -230,21 +208,19 @@
             // Update page information
             function updatePageInfo() {
                 const info = table.page.info();
-                $('#pageInfo').html(
-                    `<span class="font-medium">Halaman ${info.page + 1}</span> dari <span class="font-medium">${info.pages}</span>`
-                    );
-
+                $('#pageInfo').html(`<span class="font-medium">Halaman ${info.page + 1}</span> dari <span class="font-medium">${info.pages}</span>`);
+                
                 // Update button states
                 $('#prevPage').prop('disabled', !table.page.info().page);
                 $('#nextPage').prop('disabled', table.page.info().page >= table.page.info().pages - 1);
-
+                
                 // Update button styles based on state
                 if (!table.page.info().page) {
                     $('#prevPage').addClass('opacity-50 cursor-not-allowed');
                 } else {
                     $('#prevPage').removeClass('opacity-50 cursor-not-allowed');
                 }
-
+                
                 if (table.page.info().page >= table.page.info().pages - 1) {
                     $('#nextPage').addClass('opacity-50 cursor-not-allowed');
                 } else {
@@ -292,9 +268,8 @@
                     focusConfirm: false,
                     preConfirm: () => {
                         const kelas = document.getElementById('kelasFilter').value;
-                        const jenisKelamin = document.getElementById('jenisKelaminFilter')
-                        .value;
-
+                        const jenisKelamin = document.getElementById('jenisKelaminFilter').value;
+                        
                         table.column(3).search(kelas).column(2).search(jenisKelamin).draw();
                     }
                 });

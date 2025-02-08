@@ -43,6 +43,14 @@ class StudentController extends Controller
      */
     public function create(): View
     {
+        $user = Auth::user();
+
+        if ($user->role != 1) {
+            flash()->error('Anda tidak memiliki izin');
+
+            return redirect()->route('dashboard');
+        }
+
         return view('student.create');
     }
 
@@ -51,6 +59,14 @@ class StudentController extends Controller
      */
     public function store(StudentRequest $request): RedirectResponse
     {
+        $user = Auth::user();
+
+        if ($user->role != 1) {
+            flash()->error('Anda tidak memiliki izin');
+
+            return redirect()->route('dashboard');
+        }
+
         $validated = $request->validated();
 
         if (Student::create($validated)) {
@@ -69,6 +85,14 @@ class StudentController extends Controller
      */
     public function edit(Student $siswa): View
     {
+        $user = Auth::user();
+
+        if ($user->role != 1) {
+            flash()->error('Anda tidak memiliki izin');
+
+            return redirect()->route('dashboard');
+        }
+
         return view('student.edit', compact(['siswa']));
     }
 
@@ -77,6 +101,14 @@ class StudentController extends Controller
      */
     public function update(StudentRequest $request, Student $siswa): RedirectResponse
     {
+        $user = Auth::user();
+
+        if ($user->role != 1) {
+            flash()->error('Anda tidak memiliki izin');
+
+            return redirect()->route('dashboard');
+        }
+
         $validated = $request->validated();
 
         if ($siswa->update($validated)) {
@@ -95,6 +127,14 @@ class StudentController extends Controller
      */
     public function destroy(Student $siswa): bool
     {
+        $user = Auth::user();
+
+        if ($user->role != 1) {
+            flash()->error('Anda tidak memiliki izin');
+
+            return redirect()->route('dashboard');
+        }
+
         $result = false;
 
         if ($siswa->delete()) {
@@ -108,6 +148,14 @@ class StudentController extends Controller
 
     public function lookupNIS(Request $request)
     {
+        $user = Auth::user();
+
+        if ($user->role != 1) {
+            flash()->error('Anda tidak memiliki izin');
+
+            return redirect()->route('dashboard');
+        }
+        
         $nis = $request->query('nis');
 
         $siswa = Student::where('nis', $nis)->first();

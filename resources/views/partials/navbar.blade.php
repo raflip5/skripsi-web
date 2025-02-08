@@ -10,6 +10,7 @@
                         'submenu' => [
                             ['name' => 'Mulai Klasifikasi C4.5', 'route' => 'klasifikasi.start'],
                             ['name' => 'Laporan Kasus', 'route' => 'report'],
+                            ['name' => 'Data Latih', 'route' => 'data.training']
                         ],
                     ],
                     ['name' => 'Akun', 'route' => 'ganti.index'],

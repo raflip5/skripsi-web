@@ -36,4 +36,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/predict', [ClassificationControllerC45::class, 'predict'])->name('classification.predict');
     Route::get('/clasification', [ClassificationControllerC45::class, 'index'])->name('klasifikasi.start');
     Route::get('/predict', [ClassificationControllerC45::class, 'report'])->name('klasifikasi.report');
+    Route::get('/data-training', [ClassificationControllerC45::class, 'dataTraining'])->name('data.training');
 });
