@@ -172,16 +172,16 @@
 
                             // Format the date to "d M Y h:i"
                             let formattedDate = date.toLocaleString('id-ID', {
-                                timeZone: 'Asia/Jakarta',
-                                day: '2-digit',
-                                month: 'short',
-                                year: 'numeric',
-                                hour: '2-digit',
-                                minute: '2-digit',
-                                hour12: true
-                            }).replace(',', '')
-                            .replace('PM', 'WIB')
-                            .replace('AM', 'WIB');
+                                    timeZone: 'Asia/Jakarta',
+                                    day: '2-digit',
+                                    month: 'short',
+                                    year: 'numeric',
+                                    hour: '2-digit',
+                                    minute: '2-digit',
+                                    hour12: true
+                                }).replace(',', '')
+                                .replace('PM', 'WIB')
+                                .replace('AM', 'WIB');
 
                             return formattedDate;
                         },
@@ -232,7 +232,7 @@
                 const info = table.page.info();
                 $('#pageInfo').html(
                     `<span class="font-medium">Halaman ${info.page + 1}</span> dari <span class="font-medium">${info.pages}</span>`
-                    );
+                );
 
                 // Update button states
                 $('#prevPage').prop('disabled', !table.page.info().page);
@@ -257,45 +257,55 @@
                 Swal.fire({
                     title: 'Filter Data',
                     html: `
-                        <div class="space-y-4">
-                            <div class="text-left">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Kelas</label>
-                                <select id="kelasFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                    <option value="">Semua Kelas</option>
-                                    <option value="X1">Kelas X1</option>
-                                    <option value="X2">Kelas X2</option>
-                                    <option value="XI">Kelas XI</option>
-                                    <option value="XII">Kelas XII</option>
-                                </select>
-                            </div>
-                            <div class="text-left">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Jenis Kelamin</label>
-                                <select id="jenisKelaminFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                    <option value="">Semua Jenis Kelamin</option>
-                                    <option value="Laki-laki">Laki-laki</option>
-                                    <option value="Perempuan">Perempuan</option>
-                                </select>
-                            </div>
-                        </div>
-                    `,
+            <div class="space-y-4">
+                <!-- Filter Tanggal -->
+                <div class="text-left">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal Laporan</label>
+                    <input type="date" id="tanggalFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Filter Kelas -->
+                <div class="text-left">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Kelas</label>
+                    <select id="kelasFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Semua Kelas</option>
+                        <option value="X 1">X 1</option>
+                        <option value="X 2">X 2</option>
+                        <option value="XI 1">XI 1</option>
+                        <option value="XI 2">XI 2</option>
+                        <option value="XII 1">XII 1</option>
+                        <option value="XII 2">XII 2</option>
+                    </select>
+                </div>
+
+                <!-- Filter Jenis Kelamin -->
+                <div class="text-left">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Jenis Kelamin</label>
+                    <select id="jenisKelaminFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Semua Jenis Kelamin</option>
+                        <option value="L">Laki-Laki</option>
+                        <option value="P">Perempuan</option>
+                    </select>
+                </div>
+            </div>
+        `,
                     showCancelButton: true,
                     confirmButtonText: 'Terapkan Filter',
                     cancelButtonText: 'Batal',
                     confirmButtonColor: '#3b82f6',
                     cancelButtonColor: '#6b7280',
-                    customClass: {
-                        container: 'custom-swal-container',
-                        popup: 'custom-swal-popup',
-                        confirmButton: 'bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-200',
-                        cancelButton: 'bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-all duration-200'
-                    },
                     focusConfirm: false,
                     preConfirm: () => {
+                        const tanggal = document.getElementById('tanggalFilter').value;
                         const kelas = document.getElementById('kelasFilter').value;
                         const jenisKelamin = document.getElementById('jenisKelaminFilter')
                         .value;
 
-                        table.column(3).search(kelas).column(2).search(jenisKelamin).draw();
+                        // Terapkan filter pada DataTables
+                        table.column(4).search(tanggal) // Filter berdasarkan tanggal laporan
+                            .column(3).search(kelas) // Filter berdasarkan kelas
+                            .column(2).search(jenisKelamin) // Filter berdasarkan jenis kelamin
+                            .draw();
                     }
                 });
             });

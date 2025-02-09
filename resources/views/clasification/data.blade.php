@@ -32,14 +32,13 @@
                                     <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Kelas</th>
                                     <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Umur</th>
                                     <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Insiden</th>
+                                    <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Lokasi</th>
+                                    <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Frekuensi</th>
                                     <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Insiden Kejadian</th>
                                     <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Pelaku</th>
                                     <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">JK Pelaku</th>
-                                    <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Lokasi</th>
-                                    <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Frekuensi</th>
                                     <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Dampak Psikologis</th>
                                     <th class="px-4 py-3 text-left border-b border-blue-200 font-semibold">Label</th>
-                                
                                 </tr>
                             </thead>
                             <tbody>
