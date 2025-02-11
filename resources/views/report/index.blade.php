@@ -104,7 +104,7 @@
             const table = $('#studentTable').DataTable({
                 processing: true,
                 serverSide: true,
-                pageLength: 4,
+                pageLength: 10,
                 ajax: {
                     url: "{{ route('report') }}",
                     type: 'GET'
@@ -147,8 +147,8 @@
                         data: 'student.jenis_kelamin',
                         name: 'student.jenis_kelamin',
                         render: function(data) {
-                            return data === 'L' ? 'Laki-laki' :
-                                data === 'P' ? 'Perempuan' :
+                            return data.trim() === 'L' ? 'Laki-laki' :
+                                data.trim() === 'P' ? 'Perempuan' :
                                 data || '-';
                         },
                         className: 'px-4 py-3 text-sm border-b border-gray-100'
@@ -187,7 +187,6 @@
                         },
                         className: 'px-4 py-3 text-sm border-b border-gray-100'
                     },
-
                     {
                         data: 'result',
                         name: 'result',

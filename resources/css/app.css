@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-.dataTables_paginate .paging_simple_numbers {
-    display: none;
+.dataTables_paginate.paging_simple_numbers {
+    display: none !important;
+}
+
+.dataTables_filter label {
+    display: none !important;
 }

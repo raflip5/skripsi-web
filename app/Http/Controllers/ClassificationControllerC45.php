@@ -48,55 +48,65 @@ class ClassificationControllerC45 extends Controller
         }
 
         // Ambil data dari form
-        $nis = $request->nis;
+        $nis = trim( $request->nis);
 
         $student = Student::where('nis', $nis)->first();
 
         $data = [
             [
-                $request->jenis_kelamin,
-                $request->kelas,
+                trim($student->jenis_kelamin) == 'P' ? 'Perempuan' : 'Laki-Laki',
+                trim($student->kelas),
                 $request->umur,
-                $request->insiden,
-                $request->insiden_langsung,
-                $request->siapa_pelaku,
-                $request->jenis_kelamin_pelaku,
-                $request->lokasi,
-                $request->frekuensi,
-                $request->dampak_psikologis
+                trim($request->insiden),
+                trim($request->insiden_langsung),
+                trim($request->siapa_pelaku),
+                trim($request->jenis_kelamin_pelaku),
+                trim($request->lokasi),
+                trim($request->frekuensi),
+                trim($request->dampak_psikologis)
             ]
         ];
+
+        // dd($data);
 
         // Data latih dan label (hasil klasifikasi)
         $samplesData = Training::with('student')->get();
 
         foreach ($samplesData as $index => $dataTraining) {
             $samples[$index] = [
-                $dataTraining->student->jenis_kelamin == 'L' ? 'Laki-Laki' : 'Perempuan',
-                $dataTraining->student->kelas,
+                trim($dataTraining->student->jenis_kelamin) == 'L' ? 'Laki-Laki' : 'Perempuan',
+                trim($dataTraining->student->kelas),
                 $dataTraining->umur,
-                $dataTraining->insiden,
-                $dataTraining->pelaku,
-                $dataTraining->jenis_kelamin_pelaku,
-                $dataTraining->lokasi,
-                $dataTraining->frekuensi,
-                $dataTraining->dampak,
-                $dataTraining->hasil
+                trim($dataTraining->insiden),
+                trim($dataTraining->pelaku),
+                trim($dataTraining->jenis_kelamin_pelaku),
+                trim($dataTraining->lokasi),
+                trim($dataTraining->frekuensi),
+                trim($dataTraining->dampak),
+                trim($dataTraining->hasil)
             ];
         }
+
+        // dd($samplesData);
+
+        // dd($samples);
 
         // Hasil klasifikasi
         $features = array_map(function ($sample) {
             return array_slice($sample, 0, count($sample) - 1); // Ambil semua data kecuali label
-        }, $samples);
+        }, $samples);   
+        
+        // dd($features);
 
         $labels = array_map(function ($sample) {
             return end($sample); // Ambil label yang ada di akhir data
         }, $samples);
 
+        // dd($samples);
+
         // Latih model dengan DecisionTree (algoritma pohon keputusan)
         $classifier = new DecisionTree();
-        $classifier->train($samples, $labels);
+        $classifier->train($features, $labels);
 
         // Prediksi hasil berdasarkan input pengguna
         $prediction = $classifier->predict($data);
@@ -105,7 +115,7 @@ class ClassificationControllerC45 extends Controller
 
         // Create history data
         History::create([
-            'student_id' => $student->id,
+            'student_id' => trim($student->id),
             'result' => $prediction[0],
             'score' => $confidences
         ]);
@@ -113,7 +123,7 @@ class ClassificationControllerC45 extends Controller
         // Create data latih
         Training::firstOrCreate(
             [
-                'student_nis' => $student->nis,
+                'student_nis' => trim($student->nis),
                 'umur' => $request->umur,
                 'insiden' => $request->insiden,
                 'lokasi' => $request->lokasi,
@@ -147,7 +157,7 @@ class ClassificationControllerC45 extends Controller
         $prediction = $classifier->predict($data);
         $confidence = isset($counts[$prediction[0]]) ? ($counts[$prediction[0]] / count($predictions)) * 100 : 0;
 
-        return $confidence; // Skor kepastian (dalam persen)
+        return number_format($confidence, 2); // Skor kepastian (dalam persen)
     }
 
     public function dataTraining(Request $request): View|JsonResponse

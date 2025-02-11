@@ -125,12 +125,12 @@
                                         required>
                                         @php
                                             $lokasi = [
-                                                'kelas',
-                                                'media sosial',
-                                                'koridor sekolah',
-                                                'kantin',
-                                                'toilet',
-                                                'lapangan',
+                                                'Kelas',
+                                                'Media sosial',
+                                                'Koridor sekolah',
+                                                'Kantin',
+                                                'Toilet',
+                                                'Lapangan',
                                             ];
                                         @endphp
                                         @foreach ($lokasi as $lok)

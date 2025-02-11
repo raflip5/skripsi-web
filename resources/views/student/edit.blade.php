@@ -61,12 +61,15 @@
                         <label for="kelas" class="block text-sm font-medium text-gray-700 mb-2">
                             Kelas
                         </label>
-                        <select id="kelas" name="kelas" required
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('kelas') border-red-500 @enderror">
+                        <select id="kelas" name="kelas" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('kelas') border-red-500 @enderror">
                             <option value="">Pilih Kelas</option>
-                            <option value="X" {{ $siswa->kelas == 'X' ? 'selected' : '' }}>Kelas X</option>
-                            <option value="XI" {{ $siswa->kelas == 'XI' ? 'selected' : '' }}>Kelas XI</option>
-                            <option value="XII" {{ $siswa->kelas == 'XII' ? 'selected' : '' }}>Kelas XII</option>
+                            @foreach (['X', 'XI', 'XII'] as $kelas)
+                                @for ($i = 1; $i <= 3; $i++)
+                                    <option value="{{ $kelas . ' ' . $i }}" {{ $siswa->kelas == $kelas . ' ' . $i ? 'selected' : '' }}>
+                                        {{ $kelas . ' ' . $i }}
+                                    </option>
+                                @endfor
+                            @endforeach
                         </select>
                         @error('kelas')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
