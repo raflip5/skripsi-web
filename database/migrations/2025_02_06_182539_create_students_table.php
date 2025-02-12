@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tbl_students', function (Blueprint $table) {
             $table->id();
-            $table->string('nis')->unique();
+            $table->integer('nis')->unique();
             $table->string('name');
             $table->string('jenis_kelamin');
             $table->string('kelas');

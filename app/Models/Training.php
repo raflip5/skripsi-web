@@ -23,6 +23,10 @@ class Training extends Model
         'hasil'
     ];
 
+    protected $casts = [
+        'student_nis' => 'integer'
+    ];
+
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class, 'student_nis', 'nis');

@@ -98,8 +98,8 @@
                         data: 'student.jenis_kelamin', 
                         name: 'student.jenis_kelamin',
                         render: function(data) {
-                            return data.trim() === 'L' ? 'Laki-laki' : 
-                                   data.trim() === 'P' ? 'Perempuan' : 
+                            return data === 'L' ? 'Laki-laki' : 
+                                   data === 'P' ? 'Perempuan' : 
                                    data || '-';
                         },
                         className: 'px-4 py-3 text-sm border-b border-gray-100'

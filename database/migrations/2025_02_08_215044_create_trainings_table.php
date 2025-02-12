@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tbl_trainings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_nis');
+            $table->integer('student_nis');
             $table->integer('umur');
             $table->string('insiden');
             $table->string('lokasi');

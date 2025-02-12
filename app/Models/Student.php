@@ -16,11 +16,9 @@ class Student extends Model
         'kelas'
     ];
 
-    public function getNisAttribute($value)
-    {
-        // Remove BOM (Byte Order Mark) and trim the value
-        return trim(preg_replace('/\xEF\xBB\xBF/', '', $value));
-    }
+    protected $casts = [
+        'nis' => 'integer'
+    ];
 
     public function trainings(): HasMany
     {
